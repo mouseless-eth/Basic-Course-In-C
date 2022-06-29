@@ -13,5 +13,8 @@ int main()
     printf("Nack Header: valid %d, source %d frame id %d type %d \n", validateHeader(nackHeader), getSourceAddress(nackHeader), getFrameId(nackHeader), getFrameType(nackHeader));
     printf("Frame Header: valid %d, source %d frame id %d type %d \n", validateHeader(frameHeader), getSourceAddress(frameHeader), getFrameId(frameHeader), getFrameType(frameHeader));
 
+    // shoudl be 0
+    printf("%d is valid: %d (shoudl be 0)\n", 357953898, validateHeader(357953898));
+
     return 0;
 }

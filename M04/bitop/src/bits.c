@@ -1,6 +1,7 @@
 #include "bits.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
 
 /* DESCRIPTION:
  * ------------
@@ -119,5 +120,11 @@ int op_bit_get(uint32_t data, int i) {
  */
 
 void op_print_byte(unsigned char b) {
-  printf("%b", b);
+  for (int i = 7; i >= 0; i--) {
+    if (b & (1 << i)) {
+        printf("1");
+    } else {
+        printf("0");
+    }
+  }
 }
