@@ -1,0 +1,55 @@
+#include "source.h"
+#include "stdio.h"
+#include "stdlib.h"
+#include "stdbool.h"
+#include "strings.h"
+#include "string.h"
+
+/**
+ * \brief Removes the C comments from the input C code.
+ *
+ * \details The function polishes the code by */
+//          - removing the block comments delimited by /* and */.
+/*            These comments may span multiple lines.You should remove only */
+//            characters starting with /* and ending with */. The characters,
+/*            including white space characters (' ', \n, \r, \t), */
+//            after */ should not be removed.
+/*
+ *          - remove the line comments starting with // until and including the
+ *            newline character \n.
+ *
+ * \param input A code segment that contains some comments.It is a dynamically
+ *              allocated string(array of characters).
+ * \return A pointer to the polished code
+ */
+
+char *delete_comments(char *input)
+{
+  size_t length = strlen(input);
+  char* clean_string;
+  clean_string = (char*)malloc(sizeof(char)*length);
+  
+  bool single_line = false;
+  bool multiple_line = false;
+
+  // Traverse through whole input program
+  for (int i=0; i<(int)length; i++) 
+  {
+    if(single_line == true && input[i] == '\n')
+      single_line = false;
+    else if (multiple_line == true && input[i] == '*' && input[i+1] == '/')
+      multiple_line = false, i++;
+
+    else if (single_line || multiple_line)
+      continue;
+
+    else if (input[i] == '/' && input[i+1] == '/')
+      single_line = true, i++;
+    else if (input[i] == '/' && input[i+1] == '*')
+      multiple_line = true, i++;
+    else clean_string[0] += input[i];
+  }
+  clean_string += '\0';
+
+  return clean_string;
+}

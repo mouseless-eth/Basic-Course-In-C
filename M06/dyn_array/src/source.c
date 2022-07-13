@@ -1,5 +1,9 @@
-
 #include "source.h"
+#include "stdio.h"
+#include "stdlib.h"
+#include "stdbool.h"
+#include "strings.h"
+#include "string.h"
 
 /**
  * \brief Creates a dynamically allocated array and reads the specified number of
@@ -10,7 +14,12 @@
  */
 int *create_dyn_array(unsigned int n)
 {
-    
+  int* arr;    
+  arr = (int*)calloc(n, sizeof(int));
+  for(unsigned int i=0;i<n;i++){
+   scanf("%d",&arr[i]);
+  }
+  return arr;
 }
 
 /**
@@ -23,5 +32,7 @@ int *create_dyn_array(unsigned int n)
  */
 int *add_dyn_array(int *arr, unsigned int num, int newval)
 {
-    
+  int *newarr = (int*)realloc(arr, (num+1)*sizeof(int));
+  newarr[num] = newval;
+  return newarr;
 }
